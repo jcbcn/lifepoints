@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+
+
+
+<link rel="modulepreload" href="/./_app/start-ec27300f.js">
+			<link rel="modulepreload" href="/./_app/chunks/vendor-8009c737.js">
+			<link rel="modulepreload" href="/./_app/pages/blog/some-post.svelte-12b5d30f.js">
+			<link rel="stylesheet" href="/./_app/assets/start-e44bff30.css">
+
+
+		<script type="module">
+			import { start } from "/./_app/start-ec27300f.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":"/."},
+				session: {},
+				host: location.host,
+				route: true,
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/./_app/pages/blog/some-post.svelte-12b5d30f.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "/blog/some-post",
+						query: new URLSearchParams(""),
+						params: {}
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="svelte">
+
+
+
+
+<div>I&#39;m some post! :-)</div>
+
+<h1 class="font-semibold text-2xl">Some post</h1>
+
+
+
+	
+</div>
+	</body>
+</html>
