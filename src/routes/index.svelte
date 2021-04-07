@@ -13,7 +13,6 @@
 </svelte:head>
 
 <main>
-  <!-- This example requires Tailwind CSS v2.0+ -->
   <div>
     <div class="sticky top-0">
       <nav class="bg-gray-800">
