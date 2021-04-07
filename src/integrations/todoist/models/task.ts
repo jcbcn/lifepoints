@@ -10,4 +10,5 @@ export interface Task {
 	order: number;
 	priority: number;
 	url: string;
+	label_ids: number[];
 }

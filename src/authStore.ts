@@ -1,3 +1,3 @@
-import { Writable, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-export const authToken: Writable<string> = writable("");
+export const authToken = writable('');

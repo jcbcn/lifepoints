@@ -1,21 +1,41 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { count } from '../appStore';
 
 	import { fetchTasks } from '../integrations/todoist/todoistService';
+
+	import config from '../authConfig';
+
+	import { authToken } from '../authStore';
+
+	const labelCache = {
+		2156538858: '1P'
+	};
 
 	let toggle;
 
 	function setToggle() {
 		toggle = !toggle;
 	}
+
+	onMount(async () => {
+		authToken.set(sessionStorage.getItem('authToken'))
+	});
+
+	function login() {
+		window.location.href =
+			`https://${config.domain}/authorize?client_id=${config.clientId}` +
+			'&scope=data%3Aread_write' +
+			'&state=TODO';
+	}
 </script>
 
 <svelte:head>
 	<title>{$count} Lifepoints</title>
 </svelte:head>
-
 <main>
 	<div>
+		{$authToken}
 		<div class="sticky top-0">
 			<nav class="bg-gray-800">
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,6 +70,7 @@
 								<div class="ml-3 relative">
 									<div>
 										<button
+											on:click={login}
 											type="button"
 											class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
 											id="user-menu"
@@ -236,7 +257,15 @@
 						{#await fetchTasks()}
 							<p>Loading tasks...</p>
 						{:then data}
-							<p>{data}</p>
+							{#each data as task}
+								<p>{task.content}</p>
+								{#each task.label_ids as labelId}
+									<span
+										class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+										>{labelCache[labelId]}</span
+									>
+								{/each}
+							{/each}
 						{:catch error}
 							<p>Failed to retrieve tasks!</p>
 						{/await}
