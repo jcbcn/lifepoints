@@ -33,6 +33,7 @@
 <svelte:head>
 	<title>{$count} Lifepoints</title>
 </svelte:head>
+
 <main>
 	<div>
 		{$authToken}
