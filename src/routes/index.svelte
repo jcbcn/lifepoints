@@ -1,34 +1,12 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { count } from '../appStore';
 
-	import { fetchTasks } from '../integrations/todoist/todoistService';
-
-	import { login as doLogin, checkCallback } from '../authService';
-
-	import { authToken, accessToken } from '../authStore';
-import type { Task } from 'src/integrations/todoist/models/task';
-
-	const labelCache = {
-		2156538858: '1P'
-	};
+	import TokenModal from '$lib/TokenModal.svelte'
 
 	let toggle;
 
 	function setToggle() {
 		toggle = !toggle;
-	}
-
-	let taskPromise: Promise<Task[]> = Promise.resolve([]);
-
-	onMount(async () => {
-		await checkCallback().then(() => {
-			taskPromise = fetchTasks();
-		});
-	});
-
-	function login(){
-		doLogin();
 	}
 </script>
 
@@ -36,9 +14,9 @@ import type { Task } from 'src/integrations/todoist/models/task';
 	<title>{$count} Lifepoints</title>
 </svelte:head>
 
+<TokenModal/>
+
 <main>
-	{$authToken}
-	{$accessToken}
 	<div>
 		<div class="sticky top-0">
 			<nav class="bg-gray-800">
@@ -74,7 +52,6 @@ import type { Task } from 'src/integrations/todoist/models/task';
 								<div class="ml-3 relative">
 									<div>
 										<button
-											on:click={login}
 											type="button"
 											class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
 											id="user-menu"
@@ -238,7 +215,6 @@ import type { Task } from 'src/integrations/todoist/models/task';
 
 								<a
 									href="#"
-									on:click={login} 
 									class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
 									>Sign out</a
 								>
@@ -259,7 +235,7 @@ import type { Task } from 'src/integrations/todoist/models/task';
 				<h1 class="text-2xl font-bold text-gray-900">Today</h1>
 				<div class="px-4 py-6 sm:px-0">
 					<div class="border-4 border-dashed border-gray-200 rounded-lg h-24">
-						{#await taskPromise}
+						<!-- {#await taskPromise}
 							<p>Loading tasks...</p>
 						{:then data}
 							{#each data as task}
@@ -273,7 +249,7 @@ import type { Task } from 'src/integrations/todoist/models/task';
 							{/each}
 						{:catch error}
 							<p>Failed to retrieve tasks!</p>
-						{/await}
+						{/await} -->
 					</div>
 				</div>
 				<h1 class="text-2xl font-bold text-gray-900">Overdue</h1>
