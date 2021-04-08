@@ -4,9 +4,10 @@
 
 	import { fetchTasks } from '../integrations/todoist/todoistService';
 
-	import config from '../authConfig';
+	import { login as doLogin, checkCallback } from '../authService';
 
-	import { authToken } from '../authStore';
+	import { authToken, accessToken } from '../authStore';
+import type { Task } from 'src/integrations/todoist/models/task';
 
 	const labelCache = {
 		2156538858: '1P'
@@ -18,15 +19,16 @@
 		toggle = !toggle;
 	}
 
+	let taskPromise: Promise<Task[]> = Promise.resolve([]);
+
 	onMount(async () => {
-		authToken.set(sessionStorage.getItem('authToken'))
+		await checkCallback().then(() => {
+			taskPromise = fetchTasks();
+		});
 	});
 
-	function login() {
-		window.location.href =
-			`https://${config.domain}/authorize?client_id=${config.clientId}` +
-			'&scope=data%3Aread_write' +
-			'&state=TODO';
+	function login(){
+		doLogin();
 	}
 </script>
 
@@ -35,8 +37,9 @@
 </svelte:head>
 
 <main>
+	{$authToken}
+	{$accessToken}
 	<div>
-		{$authToken}
 		<div class="sticky top-0">
 			<nav class="bg-gray-800">
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -256,7 +259,7 @@
 				<h1 class="text-2xl font-bold text-gray-900">Today</h1>
 				<div class="px-4 py-6 sm:px-0">
 					<div class="border-4 border-dashed border-gray-200 rounded-lg h-24">
-						{#await fetchTasks()}
+						{#await taskPromise}
 							<p>Loading tasks...</p>
 						{:then data}
 							{#each data as task}
