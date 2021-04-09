@@ -1,0 +1,7 @@
+Lifepoints does not collect or process any data. We physically can't. We don't have any servers in order to do so.
+
+Lifepoints allows you to interact directly with the Todoist API via your browser.
+
+Lifepoints is a frontend SPA hosted via GitHub Pages and served over HTTPS.
+
+Our SPA does not import any third party assets (inc. scripts/css/images).
