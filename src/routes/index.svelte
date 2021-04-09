@@ -1,7 +1,21 @@
 <script lang="ts">
 	import { count } from '../appStore';
 
-	import TokenModal from '$lib/TokenModal.svelte'
+	import { getContext } from 'svelte';
+
+	import Modal from '$lib/Modal.svelte';
+
+	import TokenCheck from '$lib/TokenCheck.svelte';
+
+	import { modal, authToken } from '../authStore';
+
+	const showPopup = () => {
+		if ($authToken == '') {
+			modal.set(TokenCheck);
+		}
+	};
+
+	showPopup();
 
 	let toggle;
 
@@ -14,8 +28,9 @@
 	<title>{$count} Lifepoints</title>
 </svelte:head>
 
-<TokenModal/>
+<Modal show={$modal} />
 
+{$authToken}
 <main>
 	<div>
 		<div class="sticky top-0">
