@@ -43,13 +43,13 @@
 
 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
 	<h1 class="text-2xl font-bold text-gray-900">Today</h1>
-	<div class="px-4 py-6 sm:px-0 mb-6">
+	<div class="px-0 py-6 mb-6">
 		<div class="rounded-lg">
 			{#await promise}
 				<p>Loading tasks...</p>
 			{:then data}
 				{#each data as task}
-					<div class="w-full border-b-2 border-gray-200 p-2 hover:bg-gray-50" on:click={completeTask(task)}>
+					<div class="w-full border-b-2 border-gray-200 px-2 py-3 hover:bg-gray-50" on:click={completeTask(task)}>
 						{task.content}
 						{#each task.label_ids as labelId}
 							<span
