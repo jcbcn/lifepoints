@@ -19,7 +19,7 @@
 <main>
 	<div class="sticky top-0">
 		<nav class="bg-gray-800">
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex items-center justify-between h-16">
 					<div class="flex items-center">
 						<div class="flex-shrink-0">
@@ -129,7 +129,7 @@
 			{/if}
 		</nav>
 		<header class="bg-white shadow">
-			<div class="max-w-7xl mx-auto">
+			<div class="max-w-4xl mx-auto">
 				<nav class="flex flex-row">
 					<button
 						class="flex-none text-l text-gray-900 py-3 px-3 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
