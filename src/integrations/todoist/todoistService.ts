@@ -4,7 +4,7 @@ import { authToken } from '../../authStore';
 
 
 export const fetchTasks = async (): Promise<Task[]> => {
-    const url = 'https://api.todoist.com/rest/v1/';
+    const url = 'https://api.todoist.com/rest/v1';
 
     let headers: HeadersInit = {
         Authorization: `Bearer ${get(authToken)}`
