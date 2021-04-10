@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { count } from '../appStore';
 
-	import { getContext } from 'svelte';
+	import { onMount } from 'svelte';
 
 	import Modal from '$lib/Modal.svelte';
 
@@ -9,13 +9,26 @@
 
 	import { modal, authToken } from '../authStore';
 
+	import { fetchTasks } from '../integrations/todoist/todoistService';
+	import type { Task } from 'src/integrations/todoist/models/task';
+
 	const showPopup = () => {
-		if ($authToken == '') {
+		if (!$authToken || $authToken == '') {
 			modal.set(TokenCheck);
 		}
 	};
 
-	showPopup();
+	const labelCache = {
+		2156538858: '1P'
+	};
+
+	let promise = Promise.resolve<Task[]>([]);
+
+	onMount(async () => {
+		$authToken = localStorage.getItem('authToken');
+		showPopup();
+		promise = fetchTasks();
+	});
 
 	let toggle;
 
@@ -30,7 +43,6 @@
 
 <Modal show={$modal} />
 
-{$authToken}
 <main>
 	<div>
 		<div class="sticky top-0">
@@ -250,7 +262,7 @@
 				<h1 class="text-2xl font-bold text-gray-900">Today</h1>
 				<div class="px-4 py-6 sm:px-0">
 					<div class="border-4 border-dashed border-gray-200 rounded-lg h-24">
-						<!-- {#await taskPromise}
+						{#await promise}
 							<p>Loading tasks...</p>
 						{:then data}
 							{#each data as task}
@@ -264,7 +276,7 @@
 							{/each}
 						{:catch error}
 							<p>Failed to retrieve tasks!</p>
-						{/await} -->
+						{/await}
 					</div>
 				</div>
 				<h1 class="text-2xl font-bold text-gray-900">Overdue</h1>

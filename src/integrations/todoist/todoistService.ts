@@ -1,13 +1,13 @@
 import type { Task } from './models/task'
 import { get } from 'svelte/store'
-import { accessToken, authToken } from '../../authStore';
+import { authToken } from '../../authStore';
 
 
 export const fetchTasks = async (): Promise<Task[]> => {
     const url = 'https://api.todoist.com/rest/v1/';
 
     let headers: HeadersInit = {
-        Authorization: `Bearer ${get(accessToken)}`
+        Authorization: `Bearer ${get(authToken)}`
     };
 
     let opts: RequestInit = {

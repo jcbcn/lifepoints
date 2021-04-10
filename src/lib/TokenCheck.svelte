@@ -5,6 +5,7 @@
     const { close } = getContext('simple-modal');
 
     function onClose(){
+        localStorage.setItem('authToken', $authToken);
         close();
     }
 </script>
