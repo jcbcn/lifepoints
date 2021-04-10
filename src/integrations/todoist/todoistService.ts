@@ -18,3 +18,7 @@ export const fetchTasks = async (): Promise<Task[]> => {
     const response = await fetch(`${url}/tasks?filter=${filter}`, opts);
     return await response.json();
 };
+
+export const clearLocalStorage = () => {
+    localStorage.clear();
+}

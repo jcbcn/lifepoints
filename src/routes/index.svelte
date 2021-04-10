@@ -9,7 +9,7 @@
 
 	import { modal, authToken } from '../authStore';
 
-	import { fetchTasks } from '../integrations/todoist/todoistService';
+	import { fetchTasks, clearLocalStorage } from '../integrations/todoist/todoistService';
 	import type { Task } from 'src/integrations/todoist/models/task';
 
 	const showPopup = () => {
@@ -241,9 +241,10 @@
 								>
 
 								<a
+									on:click={clearLocalStorage}
 									href="#"
 									class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
-									>Sign out</a
+									>Clear Local Storage</a
 								>
 							</div>
 						</div>
