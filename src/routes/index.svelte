@@ -61,7 +61,9 @@
 	<div class="py-6 mb-6">
 		<div class="rounded-lg">
 			{#await promise}
-				<p>Loading tasks...</p>
+				<div class="w-full p-2 text-center">
+					<span class="text-sm text-gray-300">Loading tasks...</span>
+				</div>
 			{:then data}
 				{#each todaysTasks as task}
 					<div
@@ -84,16 +86,18 @@
 				<p>Failed to retrieve tasks!</p>
 			{/await}
 			{#if todaysTasks.length == 0}
-			<div class="w-full p-2 text-center">
-				<span class="text-sm text-gray-300">You don't have any tasks</span>
-			</div>
-		{/if}
+				<div class="w-full p-2 text-center">
+					<span class="text-sm text-gray-300">You don't have any tasks</span>
+				</div>
+			{/if}
 		</div>
 	</div>
 	<h1 class="text-2xl font-bold text-gray-900">Overdue</h1>
 	<div class="py-6 mb-6">
 		{#await promise}
-			<p>Loading tasks...</p>
+			<div class="w-full p-2 text-center">
+				<span class="text-sm text-gray-300">Loading tasks...</span>
+			</div>
 		{:then data}
 			{#each overdueTasks as task}
 				<div
@@ -116,10 +120,10 @@
 			<p>Failed to retrieve tasks!</p>
 		{/await}
 		{#if overdueTasks.length == 0}
-		<div class="w-full p-2 text-center">
-			<span class="text-sm text-gray-300">You don't have any upcoming tasks</span>
-		</div>
-	{/if}
+			<div class="w-full p-2 text-center">
+				<span class="text-sm text-gray-300">You don't have any upcoming tasks</span>
+			</div>
+		{/if}
 	</div>
 	<h1 class="text-2xl font-bold text-gray-900">Upcoming</h1>
 	<div class="px-4 py-6 sm:px-0">
