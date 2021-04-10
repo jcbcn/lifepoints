@@ -18,6 +18,8 @@
 		}
 	};
 
+	const today = new Date().toISOString().split('T')[0];
+
 	const labelCache = {
 		2156538858: 1,
 		2156538859: 2,
@@ -27,8 +29,11 @@
 	};
 
 	let promise = Promise.resolve<Task[]>([]);
+	let tasks: Task[] = [];
 
 	function completeTask(task: Task) {
+		task.done = true;
+		tasks = tasks.filter(t => !t.done);
 		$points += labelCache[task.label_ids[0]];
 	}
 
@@ -36,6 +41,9 @@
 		$authToken = localStorage.getItem('authToken');
 		showPopup();
 		promise = fetchTasks();
+		promise.then(data => {
+			tasks = data;
+		});
 	});
 </script>
 
@@ -52,10 +60,10 @@
 			{#await promise}
 				<p>Loading tasks...</p>
 			{:then data}
-				{#each data as task}
+				{#each tasks.filter(t => t.due.date == today) as task }
 					<div
 						class="task-list-item w-full border-b-2 border-gray-200 px-2 py-3 hover:bg-gray-50"
-						on:click={completeTask(task)}
+						on:click={() => completeTask(task)}
 					>
 					<div class="radio-button-container mr-2">
 						<div class="radio-button"></div>
@@ -76,9 +84,29 @@
 	</div>
 	<h1 class="text-2xl font-bold text-gray-900">Overdue</h1>
 	<div class="px-4 py-6 sm:px-0">
-		<div class="w-full p-2 text-center">
-			<span class="text-sm text-gray-300">You don't have any overdue tasks</span>
-		</div>
+		{#await promise}
+		<p>Loading tasks...</p>
+	{:then data}
+		{#each tasks.filter(t => t.due.date != today) as task }
+			<div
+				class="task-list-item w-full border-b-2 border-gray-200 px-2 py-3 hover:bg-gray-50"
+				on:click={() => completeTask(task)}
+			>
+			<div class="radio-button-container mr-2">
+				<div class="radio-button"></div>
+			</div>
+				{task.content}
+				{#each task.label_ids as labelId}
+					<span
+						class="float-right inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+						>{labelCache[labelId]} LP</span
+					>
+				{/each}
+			</div>
+		{/each}
+	{:catch error}
+		<p>Failed to retrieve tasks!</p>
+	{/await}
 	</div>
 	<h1 class="text-2xl font-bold text-gray-900">Upcoming</h1>
 	<div class="px-4 py-6 sm:px-0">

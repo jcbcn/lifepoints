@@ -7,6 +7,8 @@
 
 	let toggle;
 
+	const lifepoints = "lifepoints";
+
 	function setToggle() {
 		toggle = !toggle;
 	}
