@@ -1,8 +1,11 @@
 import type { Task } from './models/task'
 import { get } from 'svelte/store'
 import { authToken } from '../../authStore';
+import type { Project } from './models/project';
 
 const url = 'https://api.todoist.com/rest/v1';
+
+const projectName = "_points";
 
 export const init = async() => {
     //check authToken
@@ -17,7 +20,6 @@ export const init = async() => {
 }
 
 export const fetchTasks = async (): Promise<Task[]> => {
-
     let headers: HeadersInit = {
         Authorization: `Bearer ${get(authToken)}`
     };
@@ -31,8 +33,37 @@ export const fetchTasks = async (): Promise<Task[]> => {
     return await response.json();
 };
 
-export const completeTask = async() => {
-    
+export const completeTask = async(task:Task) => {
+    let headers: HeadersInit = {
+        Authorization: `Bearer ${get(authToken)}`
+    };
+
+    let opts: RequestInit = {
+        headers: headers
+    };
+
+    const response = await fetch(`${url}/tasks/${task.id}/close`, opts);
+    return await response.json();
+}
+
+export const getLifepoints = async() => {
+    let headers: HeadersInit = {
+        Authorization: `Bearer ${get(authToken)}`
+    };
+
+    let opts: RequestInit = {
+        headers: headers
+    };
+
+    const response = await fetch(`${url}/projects`, opts);
+    var projects: Project[] = await response.json();
+
+    var project = projects.filter(p => p.name == projectName)[0];
+
+    const pointsReponse = await fetch(`${url}/tasks?project_id=${project.id}`, opts);
+    let lifepoints: Task[] = await pointsReponse.json();
+
+    return lifepoints[0].content;
 }
 
 export const clearLocalStorage = () => {

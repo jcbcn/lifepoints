@@ -9,7 +9,7 @@
 
 	import { modal, authToken } from '../authStore';
 
-	import { fetchTasks } from '../integrations/todoist/todoistService';
+	import { fetchTasks, getLifepoints } from '../integrations/todoist/todoistService';
 	import type { Task } from '../integrations/todoist/models/task';
 
 	const showPopup = () => {
@@ -47,6 +47,8 @@
 		promise.then((data) => {
 			tasks = data;
 		});
+
+		$points = parseInt(await getLifepoints());
 	});
 </script>
 
