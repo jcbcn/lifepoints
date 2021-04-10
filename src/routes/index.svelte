@@ -54,7 +54,7 @@
 						{#each task.label_ids as labelId}
 							<span
 								class="float-right inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-								>{labelCache[labelId]}P</span
+								>{labelCache[labelId]} LP</span
 							>
 						{/each}
 					</div>

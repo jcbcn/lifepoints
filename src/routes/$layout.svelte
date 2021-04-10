@@ -22,16 +22,11 @@
 					<div class="flex items-center justify-between h-16">
 						<div class="flex items-center">
 							<div class="flex-shrink-0">
-								<img
-									class="h-8 w-8"
-									src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-									alt="Workflow"
-								/>
+                <span class="h-8 text-white font-bold text-white">Lifepoints</span>
 							</div>
 						</div>
 						<div class="hidden md:block">
 							<div class="ml-4 flex items-center md:ml-6">
-								<!-- Profile dropdown -->
 								<div class="ml-3 relative">
 									{#if toggle}
 										<div
@@ -154,8 +149,8 @@
 						</button>
 						<div class="flex-grow text-xl text-center py-3 px-4 text-right">
 							<span
-								class="bg-purple-600 rounded-full px-3 py-1 font-semibold text-gray-50"
-								>{$points}P</span
+								class="bg-blue-500 rounded-full px-3 py-1 font-semibold text-gray-50"
+								>{$points} LP</span
 							>
 						</div>
 					</nav>
