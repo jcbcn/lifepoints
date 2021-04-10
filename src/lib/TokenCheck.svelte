@@ -42,7 +42,7 @@
 				</p>
 				<div class="col-span-6 sm:col-span-3">
 					<input
-						value={$authToken}
+                        bind:value={$authToken}
 						type="text"
 						name="first_name"
 						id="first_name"
