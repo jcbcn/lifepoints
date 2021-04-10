@@ -49,7 +49,7 @@
 				<p>Loading tasks...</p>
 			{:then data}
 				{#each data as task}
-					<div class="w-full border-b-2 border-gray-200 p-2" on:click={completeTask(task)}>
+					<div class="w-full border-b-2 border-gray-200 p-2 hover:bg-gray-50" on:click={completeTask(task)}>
 						{task.content}
 						{#each task.label_ids as labelId}
 							<span

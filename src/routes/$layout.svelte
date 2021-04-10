@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TailwindCss from '$lib/Tailwind.svelte';
 
-  import { points } from '../appStore';
+	import { points } from '../appStore';
 
 	import { clearLocalStorage } from '../integrations/todoist/todoistService';
 
@@ -22,7 +22,7 @@
 					<div class="flex items-center justify-between h-16">
 						<div class="flex items-center">
 							<div class="flex-shrink-0">
-                <span class="h-8 text-white font-bold text-white">Lifepoints</span>
+								<span class="h-8 text-white font-bold text-white">Lifepoints</span>
 							</div>
 						</div>
 						<div class="hidden md:block">
@@ -129,27 +129,19 @@
 			</nav>
 			<header class="bg-white shadow">
 				<div class="max-w-7xl mx-auto">
-					<!-- <div>
-						<h1 class="text-3xl font-bold text-gray-900">Tasks</h1>
-					</div>
-					<div>
-						<h1 class="text-3xl font-bold text-gray-900">Rewards</h1>
-					</div> -->
-
 					<nav class="flex flex-row">
 						<button
-							class="flex-none text-l text-gray-900 py-2 px-3 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
+							class="flex-none text-l text-gray-900 py-3 px-3 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
 						>
 							Tasks
 						</button>
 						<button
-							class="flex-none text-l text-gray-900 py-2 px-3 block hover:text-blue-500 focus:outline-none"
+							class="flex-none text-l text-gray-900 py-3 px-3 block hover:text-blue-500 focus:outline-none border-blue-500 hover:border-b-2"
 						>
 							Rewards
 						</button>
-						<div class="flex-grow text-l text-center py-2 px-3 text-right">
-							<span
-								class="bg-blue-500 rounded-full px-3 py-1 font-semibold text-gray-50"
+						<div class="flex-grow text-l text-center py-3 px-3 text-right">
+							<span class="bg-blue-500 rounded-full px-3 py-1 font-semibold text-gray-50"
 								>{$points} LP</span
 							>
 						</div>
