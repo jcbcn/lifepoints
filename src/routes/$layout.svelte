@@ -138,16 +138,16 @@
 
 					<nav class="flex flex-row">
 						<button
-							class="flex-none text-xl text-gray-900 py-3 px-4 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
+							class="flex-none text-l text-gray-900 py-2 px-3 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
 						>
 							Tasks
 						</button>
 						<button
-							class="flex-none text-xl text-gray-900 py-3 px-4 block hover:text-blue-500 focus:outline-none"
+							class="flex-none text-l text-gray-900 py-2 px-3 block hover:text-blue-500 focus:outline-none"
 						>
 							Rewards
 						</button>
-						<div class="flex-grow text-xl text-center py-3 px-4 text-right">
+						<div class="flex-grow text-l text-center py-2 px-3 text-right">
 							<span
 								class="bg-blue-500 rounded-full px-3 py-1 font-semibold text-gray-50"
 								>{$points} LP</span
