@@ -28,8 +28,8 @@
 
 	let promise = Promise.resolve<Task[]>([]);
 
-	function completeTask(task: Task){
-		$points += labelCache[task.label_ids[0]]
+	function completeTask(task: Task) {
+		$points += labelCache[task.label_ids[0]];
 	}
 
 	onMount(async () => {
@@ -53,7 +53,13 @@
 				<p>Loading tasks...</p>
 			{:then data}
 				{#each data as task}
-					<div class="w-full border-b-2 border-gray-200 px-2 py-3 hover:bg-gray-50" on:click={completeTask(task)}>
+					<div
+						class="task-list-item w-full border-b-2 border-gray-200 px-2 py-3 hover:bg-gray-50"
+						on:click={completeTask(task)}
+					>
+					<div class="radio-button-container mr-2">
+						<div class="radio-button"></div>
+					</div>
 						{task.content}
 						{#each task.label_ids as labelId}
 							<span
@@ -81,3 +87,22 @@
 		</div>
 	</div>
 </div>
+
+<style type="text/less">
+	.radio-button-container {
+		display: inline-block;
+	}
+
+	.radio-button {
+		display: block;
+		width: 1em;
+		height: 1em;
+		border-radius: 50%;
+		border: 0.1em solid currentColor;
+	}
+
+	.task-list-item:hover .radio-button {
+		background-color: lightgray;
+	}
+
+</style>
