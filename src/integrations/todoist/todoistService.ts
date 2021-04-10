@@ -2,9 +2,21 @@ import type { Task } from './models/task'
 import { get } from 'svelte/store'
 import { authToken } from '../../authStore';
 
+const url = 'https://api.todoist.com/rest/v1';
+
+export const init = async() => {
+    //check authToken
+
+    //check setup
+
+    //loading
+        //load points
+        //build labelCache
+        //load tasks
+        //load rewards
+}
 
 export const fetchTasks = async (): Promise<Task[]> => {
-    const url = 'https://api.todoist.com/rest/v1';
 
     let headers: HeadersInit = {
         Authorization: `Bearer ${get(authToken)}`
@@ -18,6 +30,10 @@ export const fetchTasks = async (): Promise<Task[]> => {
     const response = await fetch(`${url}/tasks?filter=${filter}`, opts);
     return await response.json();
 };
+
+export const completeTask = async() => {
+    
+}
 
 export const clearLocalStorage = () => {
     localStorage.clear();

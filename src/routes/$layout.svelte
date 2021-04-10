@@ -1,6 +1,8 @@
 <script lang="ts">
 	import TailwindCss from '$lib/Tailwind.svelte';
 
+  import { points } from '../appStore';
+
 	import { clearLocalStorage } from '../integrations/todoist/todoistService';
 
 	let toggle;
@@ -141,19 +143,19 @@
 
 					<nav class="flex flex-row">
 						<button
-							class="flex-none text-2xl text-gray-900 py-4 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
+							class="flex-none text-xl text-gray-900 py-3 px-4 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
 						>
 							Tasks
 						</button>
 						<button
-							class="flex-none text-2xl text-gray-900 py-4 px-6 block hover:text-blue-500 focus:outline-none"
+							class="flex-none text-xl text-gray-900 py-3 px-4 block hover:text-blue-500 focus:outline-none"
 						>
 							Rewards
 						</button>
-						<div class="flex-grow text-2xl text-center py-4 px-6">
+						<div class="flex-grow text-xl text-center py-3 px-4 text-right">
 							<span
-								class="inline-block bg-purple-600 rounded-full px-3 py-1 font-semibold text-gray-50"
-								>100P</span
+								class="bg-purple-600 rounded-full px-3 py-1 font-semibold text-gray-50"
+								>{$points}P</span
 							>
 						</div>
 					</nav>
