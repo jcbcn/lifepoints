@@ -19,7 +19,11 @@
 	};
 
 	const labelCache = {
-		2156538858: 1
+		2156538858: 1,
+		2156538859: 2,
+		2156538862: 3,
+		2156538864: 5,
+		2156538865: 8
 	};
 
 	let promise = Promise.resolve<Task[]>([]);
@@ -68,6 +72,12 @@
 	<div class="px-4 py-6 sm:px-0">
 		<div class="w-full p-2 text-center">
 			<span class="text-sm text-gray-300">You don't have any overdue tasks</span>
+		</div>
+	</div>
+	<h1 class="text-2xl font-bold text-gray-900">Upcoming</h1>
+	<div class="px-4 py-6 sm:px-0">
+		<div class="w-full p-2 text-center">
+			<span class="text-sm text-gray-300">You don't have any upcoming tasks</span>
 		</div>
 	</div>
 </div>
