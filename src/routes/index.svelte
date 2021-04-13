@@ -26,11 +26,18 @@
 	$: todaysTasks = tasks.filter((t) => t.due.date == today);
 	$: overdueTasks = tasks.filter((t) => t.due.date != today);
 
-	function completeTask(task: Task) {
-		serviceComplete(task);
-		//task.done = true;
-		//tasks = tasks.filter((t) => !t.done);
-		//$points += labelCache[task.label_ids[0]];
+	async function completeTask(task: Task) {
+		try	{
+			await serviceComplete(task);
+			
+			task.done = true;
+			tasks = tasks.filter((t) => !t.done);
+			
+			$points = await getLifepoints();
+		}
+		catch(e) {
+			alert('failed to complete task');
+		}
 	}
 
 	onMount(async () => {
