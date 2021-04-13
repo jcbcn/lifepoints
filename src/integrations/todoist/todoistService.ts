@@ -7,6 +7,14 @@ const url = 'https://api.todoist.com/rest/v1';
 
 const projectName = "_points";
 
+export const labelCache = {
+    2156538858: 1,
+    2156538859: 2,
+    2156538862: 3,
+    2156538864: 5,
+    2156538865: 8
+};
+
 export const init = async() => {
     //check authToken
 
@@ -39,14 +47,70 @@ export const completeTask = async(task:Task) => {
     };
 
     let opts: RequestInit = {
+        method: 'POST',
         headers: headers
     };
 
     const response = await fetch(`${url}/tasks/${task.id}/close`, opts);
-    return await response.json();
+    if(await response.ok){
+        incrementLifepoints(getPointsForTask(task));
+    }
 }
 
-export const getLifepoints = async() => {
+export const incrementLifepoints = async(rewardedPoints: number) => {
+    let currentLifepoints = await getLifepoints();
+    currentLifepoints += rewardedPoints;
+
+    var task = await getLifepointsTask();
+
+    let headers: HeadersInit = {
+        'Authorization': `Bearer ${get(authToken)}`,
+        'Content-Type': 'application/json'
+    };
+
+    let opts: RequestInit = {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({"content": currentLifepoints.toString()})
+    };
+
+    const response = await fetch(`${url}/tasks/${task.id}`, opts);
+}
+
+export const getLifepoints = async() : Promise<number> => {
+    var project = await getLifepointsProject();
+
+    let headers: HeadersInit = {
+        Authorization: `Bearer ${get(authToken)}`
+    };
+
+    let opts: RequestInit = {
+        headers: headers
+    };
+
+    const pointsReponse = await fetch(`${url}/tasks?project_id=${project.id}`, opts);
+    let lifepoints: Task[] = await pointsReponse.json();
+
+    return parseInt(lifepoints[0].content);
+}
+
+const getLifepointsTask = async() : Promise<Task> => {
+    var project = await getLifepointsProject();
+
+    let headers: HeadersInit = {
+        Authorization: `Bearer ${get(authToken)}`
+    };
+
+    let opts: RequestInit = {
+        headers: headers
+    };
+
+    const pointsReponse = await fetch(`${url}/tasks?project_id=${project.id}`, opts);
+    let lifepoints: Task[] = await pointsReponse.json();
+    return lifepoints[0]; //TODO by tag
+}
+
+const getLifepointsProject = async () : Promise<Project> => {
     let headers: HeadersInit = {
         Authorization: `Bearer ${get(authToken)}`
     };
@@ -59,11 +123,15 @@ export const getLifepoints = async() => {
     var projects: Project[] = await response.json();
 
     var project = projects.filter(p => p.name == projectName)[0];
+    return project;
+}
 
-    const pointsReponse = await fetch(`${url}/tasks?project_id=${project.id}`, opts);
-    let lifepoints: Task[] = await pointsReponse.json();
+const getPointsForTask = (task: Task) : number => {
+    return labelCache[getLabelIdFromTask(task)];
+}
 
-    return lifepoints[0].content;
+const getLabelIdFromTask = (task: Task) : number =>  {
+    return task.label_ids.length > 0 ? task.label_ids[0] : null;
 }
 
 export const clearLocalStorage = () => {

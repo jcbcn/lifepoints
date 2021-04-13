@@ -9,7 +9,7 @@
 
 	import { modal, authToken } from '../authStore';
 
-	import { fetchTasks, getLifepoints } from '../integrations/todoist/todoistService';
+	import { fetchTasks, getLifepoints, labelCache, completeTask as serviceComplete } from '../integrations/todoist/todoistService';
 	import type { Task } from '../integrations/todoist/models/task';
 
 	const showPopup = () => {
@@ -20,14 +20,6 @@
 
 	const today = new Date().toISOString().split('T')[0];
 
-	const labelCache = {
-		2156538858: 1,
-		2156538859: 2,
-		2156538862: 3,
-		2156538864: 5,
-		2156538865: 8
-	};
-
 	let promise = Promise.resolve<Task[]>([]);
 	let tasks: Task[] = [];
 
@@ -35,9 +27,10 @@
 	$: overdueTasks = tasks.filter((t) => t.due.date != today);
 
 	function completeTask(task: Task) {
-		task.done = true;
-		tasks = tasks.filter((t) => !t.done);
-		$points += labelCache[task.label_ids[0]];
+		serviceComplete(task);
+		//task.done = true;
+		//tasks = tasks.filter((t) => !t.done);
+		//$points += labelCache[task.label_ids[0]];
 	}
 
 	onMount(async () => {
@@ -48,7 +41,7 @@
 			tasks = data;
 		});
 
-		$points = parseInt(await getLifepoints());
+		$points = await getLifepoints();
 	});
 </script>
 
