@@ -1,13 +1,17 @@
 <script>
-    import { getContext } from 'svelte';
+	import { getContext } from 'svelte';
 	import { authToken } from '../authStore';
 
-    const { close } = getContext('simple-modal');
+	const { close } = getContext('simple-modal');
 
-    function onClose(){
-        localStorage.setItem('authToken', $authToken);
-        close();
-    }
+	let tokenInput = "";
+
+	function onClose() {
+		$authToken = tokenInput;
+		localStorage.setItem('authToken', tokenInput);
+
+		close();
+	}
 </script>
 
 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -43,7 +47,7 @@
 				</p>
 				<div class="col-span-6 sm:col-span-3">
 					<input
-                        bind:value={$authToken}
+						bind:value={tokenInput}
 						type="text"
 						name="first_name"
 						id="first_name"
@@ -69,8 +73,8 @@
 </div>
 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 	<button
-        on:click={onClose}
-		disabled={$authToken == ''}
+		on:click={() => onClose()}
+		disabled={!tokenInput}
 		type="button"
 		class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
 	>

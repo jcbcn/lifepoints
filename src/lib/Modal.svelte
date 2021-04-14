@@ -171,6 +171,7 @@
 	  document.body.style.position = 'fixed';
 	  document.body.style.top = `-${scrollY}px`;
 	  document.body.style.overflow = 'hidden';
+	  document.body.style.width = `100%`;
 	};
   
 	const enableScroll = () => {

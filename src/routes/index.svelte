@@ -9,7 +9,13 @@
 
 	import { modal, authToken } from '../authStore';
 
-	import { fetchTasks, getLifepoints, labelCache, completeTask as serviceComplete } from '../integrations/todoist/todoistService';
+	import {
+		fetchTasks,
+		getLifepoints,
+		labelCache,
+		completeTask as serviceComplete
+	} from '../integrations/todoist/todoistService';
+
 	import type { Task } from '../integrations/todoist/models/task';
 
 	const showPopup = () => {
@@ -27,28 +33,43 @@
 	$: overdueTasks = tasks.filter((t) => t.due.date != today);
 
 	async function completeTask(task: Task) {
-		try	{
+		try {
 			await serviceComplete(task);
-			
+
 			task.done = true;
 			tasks = tasks.filter((t) => !t.done);
-			
+
 			$points = await getLifepoints();
-		}
-		catch(e) {
+		} catch (e) {
 			alert('failed to complete task');
 		}
 	}
 
-	onMount(async () => {
-		$authToken = localStorage.getItem('authToken');
-		showPopup();
+	async function init() {
+		if (!$authToken) {
+			showPopup();
+			return;
+		}
+
 		promise = fetchTasks();
 		promise.then((data) => {
 			tasks = data;
 		});
 
 		$points = await getLifepoints();
+	}
+
+	onMount(async () => {
+		let tokenFromStorage = localStorage.getItem('authToken');
+		if (tokenFromStorage) {
+			$authToken = tokenFromStorage;
+		}
+
+		await init();
+
+		authToken.subscribe(async () => {
+			await init();
+		});
 	});
 </script>
 

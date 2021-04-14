@@ -149,8 +149,9 @@ const fetchCached = async (input: RequestInfo, init?: RequestInit): Promise<any>
 	} else {
 		var response = await fetch(input, init);
 		if (response.ok) {
-			localStorage.setItem(cacheKey, JSON.stringify(await response.json()));
+			var json = await response.json();
+			localStorage.setItem(cacheKey, JSON.stringify(json));
 		}
-		return await response.json();
+		throw new Error();
 	}
 };
