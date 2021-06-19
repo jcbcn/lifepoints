@@ -1,6 +1,6 @@
-const sveltePreprocess = require('svelte-preprocess');
-const static = require('@sveltejs/adapter-static');
-const pkg = require('./package.json');
+import sveltePreprocess from 'svelte-preprocess'
+import static from '@sveltejs/adapter-static'
+import pkg from `./package.json`
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
