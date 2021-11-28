@@ -2,47 +2,35 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="description" content="" />
+		<link rel="icon" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
 
+		
 
-
-<link rel="modulepreload" href="/./_app/start-d0eadc8a.js">
-			<link rel="modulepreload" href="/./_app/chunks/index-b0b55f0d.js">
-			<link rel="modulepreload" href="/./_app/chunks/todoistService-66d17c76.js">
-			<link rel="modulepreload" href="/./_app/pages/rewards.svelte-1fcece32.js">
-			<link rel="stylesheet" href="/./_app/assets/start-47b4113f.css">
-
+		<link rel="modulepreload" href="/_app/start-b2b0886c.js">
+		<link rel="modulepreload" href="/_app/chunks/vendor-d8741df1.js">
+		<link rel="stylesheet" href="/_app/assets/start-464e9d0a.css">
 
 		<script type="module">
-			import { start } from "/./_app/start-d0eadc8a.js";
+			import { start } from "/_app/start-b2b0886c.js";
 			start({
 				target: document.querySelector("#svelte"),
-				paths: {"base":"","assets":"/."},
+				paths: {"base":"","assets":""},
 				session: {},
 				host: location.host,
 				route: true,
-				hydrate: {
-					status: 200,
-					error: null,
-					nodes: [
-						import("/./_app/pages/rewards.svelte-1fcece32.js")
-					],
-					page: {
-						host: location.host, // TODO this is redundant
-						path: "/rewards",
-						query: new URLSearchParams(""),
-						params: {}
-					}
-				}
+				spa: true,
+				trailing_slash: "never",
+				hydrate: null
 			});
 		</script>
 	</head>
 	<body>
 		<div id="svelte">
 
-	
-</div>
+			
+		</div>
 	</body>
 </html>
