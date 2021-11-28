@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TailwindCss from '$lib/Tailwind.svelte';
+	import '../app.less';
 
 	import { points } from '../appStore';
 
@@ -7,14 +7,10 @@
 
 	let toggle;
 
-	const lifepoints = "lifepoints";
-
 	function setToggle() {
 		toggle = !toggle;
 	}
 </script>
-
-<TailwindCss />
 
 <main>
 	<div class="sticky top-0">

@@ -1,3 +1,3 @@
-import { Writable, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-export const points: Writable<number> = writable(0);
+export const points = writable(0);
