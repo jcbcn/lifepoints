@@ -25,12 +25,16 @@
 	};
 
 	const today = new Date().toISOString().split('T')[0];
+	const tomorrowDate = new Date();
+	tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+	const tomorrow = tomorrowDate.toISOString().split('T')[0];
 
 	let promise = Promise.resolve<Task[]>([]);
 	let tasks: Task[] = [];
 
 	$: todaysTasks = tasks.filter((t) => t.due.date == today);
-	$: overdueTasks = tasks.filter((t) => t.due.date != today);
+	$: overdueTasks = tasks.filter((t) => t.due.date != today && t.due.date != tomorrow);
+	$: upcomingTasks = tasks.filter((t) => t.due.date == tomorrow);
 
 	async function completeTask(task: Task) {
 		try {
@@ -150,9 +154,36 @@
 	</div>
 	<h1 class="text-2xl font-bold text-gray-900">Upcoming</h1>
 	<div class="px-4 py-6 sm:px-0">
-		<div class="w-full p-2 text-center">
-			<span class="text-sm text-gray-300">You don't have any upcoming tasks</span>
-		</div>
+		{#await promise}
+			<div class="w-full p-2 text-center">
+				<span class="text-sm text-gray-300">Loading tasks...</span>
+			</div>
+		{:then data}
+			{#each upcomingTasks as task}
+				<div
+					class="task-list-item w-full border-b-2 border-gray-200 px-2 py-3 hover:bg-gray-50"
+					on:click={() => completeTask(task)}
+				>
+					<div class="radio-button-container mr-2">
+						<div class="radio-button" />
+					</div>
+					{task.content}
+					{#each task.label_ids as labelId}
+						<span
+							class="float-right inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+							>{labelCache[labelId]} LP</span
+						>
+					{/each}
+				</div>
+			{/each}
+		{:catch error}
+			<p>Failed to retrieve tasks!</p>
+		{/await}
+		{#if upcomingTasks.length == 0}
+			<div class="w-full p-2 text-center">
+				<span class="text-sm text-gray-300">You don't have any upcoming tasks</span>
+			</div>
+		{/if}
 	</div>
 </div>
 

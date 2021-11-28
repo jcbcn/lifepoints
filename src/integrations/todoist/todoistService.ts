@@ -37,7 +37,7 @@ export const fetchTasks = async (): Promise<Task[]> => {
 	};
 
 	const filter =
-		'(today%20%7C%20overdue)%20%26%20(%401P%20%7C%20%402P%20%7C%20%403P%20%7C%20%405P%20%7C%20%408P)';
+		'(today%20%7C%20overdue%20%7C%20tomorrow)%20%26%20(%401P%20%7C%20%402P%20%7C%20%403P%20%7C%20%405P%20%7C%20%408P%20%7C%20%4013P%20%7C%20%4021P%20%7C%20%4034P%20%7C%20%4055P%20%7C%20%4089P%20%7C%20%40144P%20%7C%20%40233P%20%7C%20%40377P)';
 	const response = await fetch(`${url}/tasks?filter=${filter}`, opts);
 	return await response.json();
 };
