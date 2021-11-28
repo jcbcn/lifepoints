@@ -5,6 +5,8 @@
 
 	import { clearLocalStorage } from '../integrations/todoist/todoistService';
 
+	import { page } from '$app/stores';
+
 	let toggle;
 
 	function setToggle() {
@@ -127,16 +129,20 @@
 		<header class="bg-white shadow">
 			<div class="max-w-4xl mx-auto">
 				<nav class="flex flex-row">
-					<button
-						class="flex-none text-l text-gray-900 py-3 px-3 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
+					<a
+						class="flex-none text-l text-gray-900 py-3 px-3 block hover:text-blue-500 focus:outline-none text-blue-500 font-medium border-blue-500"
+						class:border-b-2={$page.path === '/'}
+						href="/"
 					>
 						Tasks
-					</button>
-					<button
+					</a>
+					<a
 						class="flex-none text-l text-gray-900 py-3 px-3 block hover:text-blue-500 focus:outline-none border-blue-500 hover:border-b-2"
+						class:border-b-2={$page.path === '/rewards'}
+						href="/rewards"
 					>
 						Rewards
-					</button>
+					</a>
 					<div class="flex-grow text-l text-center py-3 px-3 text-right">
 						<span class="bg-blue-500 rounded-full px-3 py-1 font-semibold text-gray-50"
 							>{$points} LP</span

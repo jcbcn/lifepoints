@@ -37,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@tailwindcss/forms": "^0.3.4"
+		"@tailwindcss/forms": "^0.3.4",
+		"svelte-routing": "^1.6.0"
 	}
 }
