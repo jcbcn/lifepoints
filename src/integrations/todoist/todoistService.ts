@@ -12,7 +12,9 @@ export const labelCache = {
 	2156538859: 2,
 	2156538862: 3,
 	2156538864: 5,
-	2156538865: 8
+	2156538865: 8,
+	2156538867: 13,
+	2159004476: 377
 };
 
 export const init = async () => {
@@ -39,6 +41,23 @@ export const fetchTasks = async (): Promise<Task[]> => {
 	const response = await fetch(`${url}/tasks?filter=${filter}`, opts);
 	return await response.json();
 };
+
+export const fetchRewards = async(): Promise<Task[]> => {
+
+	var project = await getLifepointsProject();
+
+	let headers: HeadersInit = {
+		Authorization: `Bearer ${get(authToken)}`
+	};
+
+	let opts: RequestInit = {
+		headers: headers
+	};
+
+	const filter = 	'%28%401P+%7C+%402P+%7C+%403P+%7C+%405P+%7C+%408P+%7C+%4013P+%7C+%4021P+%7C+%4034P+%7C+%4055P+%7C+%4089P+%7C+%40144P+%7C+%40233P+%7C+%40377P%29+%26+%28%2FRewards%29';
+	const response = await fetch(`${url}/tasks?project_id=${project.id}&filter=${filter}`, opts);
+	return await response.json();
+}
 
 export const completeTask = async (task: Task) => {
 	let headers: HeadersInit = {
