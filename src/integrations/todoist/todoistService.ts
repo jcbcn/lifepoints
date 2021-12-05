@@ -148,7 +148,7 @@ const getLifepointsProject = async (): Promise<Project> => {
 	return project;
 };
 
-const getPointsForTask = (task: Task): number => {
+export const getPointsForTask = (task: Task): number => {
 	return labelCache[getLabelIdFromTask(task)];
 };
 

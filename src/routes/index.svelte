@@ -50,6 +50,8 @@
 	}
 
 	async function init() {
+		$modal = null;
+		
 		if (!$authToken) {
 			showPopup();
 			return;
