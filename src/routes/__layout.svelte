@@ -131,14 +131,14 @@
 				<nav class="flex flex-row">
 					<a
 						class="flex-none text-l text-gray-900 py-3 px-3 block hover:text-blue-500 focus:outline-none text-blue-500 font-medium border-blue-500"
-						class:border-b-2={$page.path === '/'}
+						class:border-b-2={$page.url.pathname === '/'}
 						href="/"
 					>
 						Tasks
 					</a>
 					<a
 						class="flex-none text-l text-gray-900 py-3 px-3 block hover:text-blue-500 focus:outline-none border-blue-500 hover:border-b-2"
-						class:border-b-2={$page.path === '/rewards'}
+						class:border-b-2={$page.url.pathname === '/rewards'}
 						href="/rewards"
 					>
 						Rewards
