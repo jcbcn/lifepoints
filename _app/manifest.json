@@ -1,0 +1,82 @@
+{
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "start-3cdaedd9.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-a3aef2e9.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte",
+      "src/routes/rewards.svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "pages/__layout.svelte-31e4beac.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-a3aef2e9.js",
+      "_todoistService-0fe8c541.js"
+    ],
+    "css": [
+      "assets/pages/__layout.svelte-886f45b9.css"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "error.svelte-3d661524.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-a3aef2e9.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-a431fabb.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-a3aef2e9.js",
+      "_todoistService-0fe8c541.js",
+      "_TokenCheck-c932f2e1.js"
+    ],
+    "css": [
+      "assets/pages/index.svelte-1f076639.css"
+    ]
+  },
+  "src/routes/rewards.svelte": {
+    "file": "pages/rewards.svelte-94f5c0c9.js",
+    "src": "src/routes/rewards.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-a3aef2e9.js",
+      "_todoistService-0fe8c541.js",
+      "_TokenCheck-c932f2e1.js"
+    ]
+  },
+  "_vendor-a3aef2e9.js": {
+    "file": "chunks/vendor-a3aef2e9.js"
+  },
+  "_todoistService-0fe8c541.js": {
+    "file": "chunks/todoistService-0fe8c541.js",
+    "imports": [
+      "_vendor-a3aef2e9.js"
+    ]
+  },
+  "_TokenCheck-c932f2e1.js": {
+    "file": "chunks/TokenCheck-c932f2e1.js",
+    "imports": [
+      "_vendor-a3aef2e9.js",
+      "_todoistService-0fe8c541.js"
+    ],
+    "css": [
+      "assets/TokenCheck-c6ca672e.css"
+    ]
+  }
+}
