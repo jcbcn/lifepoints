@@ -116,7 +116,7 @@
 			{/await}
 			{#if todaysTasks.length == 0}
 				<div class="w-full p-2 text-center">
-					<span class="text-sm text-gray-300">You don't have any tasks</span>
+					<span class="text-sm text-gray-300">You don't have any tasks for today</span>
 				</div>
 			{/if}
 		</div>
@@ -150,7 +150,7 @@
 		{/await}
 		{#if overdueTasks.length == 0}
 			<div class="w-full p-2 text-center">
-				<span class="text-sm text-gray-300">You don't have any upcoming tasks</span>
+				<span class="text-sm text-gray-300">You don't have any overdue tasks</span>
 			</div>
 		{/if}
 	</div>
