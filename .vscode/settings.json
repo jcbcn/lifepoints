@@ -1,6 +1,8 @@
 {
     "files.exclude": {
+        "**/.vscode": true,
         "**/.svelte": true,
+        "**/.svelte-kit": true,
         "**/node_modules": true,
         "build": true
     }
